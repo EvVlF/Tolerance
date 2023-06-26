@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>me.EvVlF</groupId>
+    <artifactId>Tolerance</artifactId>
+    <version>0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <H2DB.version>2.1.214</H2DB.version>
+        <junit-jupiter.version>5.9.3</junit-jupiter.version>
+        <mockito.version>5.3.1</mockito.version>
+        <maven-surefire-plugin.version>3.1.0</maven-surefire-plugin.version>
+        <maven-assembly-plugin.version>3.6.0</maven-assembly-plugin.version>
+        <launch4j.version>3.50</launch4j.version>
+        <launch4j-maven-plugin.version>2.4.1</launch4j-maven-plugin.version>
+        <project.fileVersion>0.1.0.0</project.fileVersion>
+        <project.txtFileVersion>RC</project.txtFileVersion>
+        <project.copyright>EvVlF</project.copyright>
+        <project.productVersion>0.1.0.0</project.productVersion>
+        <project.companyName>Solo</project.companyName>
+        <project.trademarks>EvVlF</project.trademarks>
+        <project.organization.name>Solo, epta</project.organization.name>
+        <project.inceptionYear>2023</project.inceptionYear>
+        <project.description>Проект на Java для себя и нимношк для войтивайти</project.description>
+    </properties>
+
+    <dependencies>
+        <!-- H2 DB -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>${H2DB.version}</version>
+        </dependency>
+
+        <!-- JUnit -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit-jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit-jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Mockito -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.launch4j</groupId>
+            <artifactId>launch4j</artifactId>
+            <version>${launch4j.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Surefire -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+            </plugin>
+            <plugin>
+                <!-- Maven assembly -->
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>${maven-assembly-plugin.version}</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>me.EvVlF.Main</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <!-- launch4j -->
+                <groupId>com.akathist.maven.plugins.launch4j</groupId>
+                <artifactId>launch4j-maven-plugin</artifactId>
+                <version>${launch4j-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>l4j-clui</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>launch4j</goal>
+                        </goals>
+                        <configuration>
+                            <headerType>console</headerType>
+                            <outfile>${project.build.directory}/tolerance.exe</outfile>
+                            <jar>${project.build.directory}/${project.build.finalName}-jar-with-dependencies.jar</jar>
+                            <priority>normal</priority>
+                            <versionInfo>
+                                <fileVersion>${project.fileVersion}</fileVersion>
+                                <txtFileVersion>${project.txtFileVersion}</txtFileVersion>
+                                <copyright>${project.copyright}}</copyright>
+                                <productVersion>${project.productVersion}</productVersion>
+                                <txtProductVersion>${project.txtFileVersion}</txtProductVersion>
+                                <companyName>${project.companyName}</companyName>
+                                <trademarks>${project.trademarks}</trademarks>
+                                <language>
+                                    ENGLISH_US|RUSSIAN
+                                </language>
+                            </versionInfo>
+                            <jre>
+                                <path>%JAVA_HOME%</path>
+                                <minVersion>1.8.0</minVersion>
+                            </jre>
+                            <jre>
+                                <path>C:\Program Files (x86)\Java\jre-1.8</path>
+                                <minVersion>1.8.0</minVersion>
+                            </jre>
+                            <jre>
+                                <path>C:\Program Files\Java\jre-1.8</path>
+                                <minVersion>1.8.0</minVersion>
+                            </jre>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
