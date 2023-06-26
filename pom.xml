@@ -25,7 +25,7 @@
         <project.productVersion>0.1.0.0</project.productVersion>
         <project.companyName>Solo</project.companyName>
         <project.trademarks>EvVlF</project.trademarks>
-        <project.organization.name>Solo, epta</project.organization.name>
+        <project.organization.name>Solo</project.organization.name>
         <project.inceptionYear>2023</project.inceptionYear>
         <project.description>Проект на Java для себя и нимношк для войтивайти</project.description>
     </properties>
@@ -112,7 +112,7 @@
                         </goals>
                         <configuration>
                             <headerType>console</headerType>
-                            <outfile>${project.build.directory}/tolerance.exe</outfile>
+                            <outfile>${basedir}/tolerance.exe</outfile>
                             <jar>${project.build.directory}/${project.build.finalName}-jar-with-dependencies.jar</jar>
                             <priority>normal</priority>
                             <versionInfo>
